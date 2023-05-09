@@ -56,6 +56,9 @@ public class EmpregadoController {
         if(oldEmpregado.isPresent()){
             Empregado Empregado = oldEmpregado.get();
             Empregado.setNome(newEmpregado.getNome());
+            Empregado.setCargo(newEmpregado.getCargo());
+            Empregado.setCidade(newEmpregado.getCidade());
+            Empregado.setSalario(newEmpregado.getSalario());
             _EmpregadoRepository.save(Empregado);
             return new ResponseEntity<Empregado>(Empregado, HttpStatus.OK);
         }

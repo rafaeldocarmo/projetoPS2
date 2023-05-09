@@ -32,9 +32,9 @@ public class CidadeController {
     @GetMapping(value = "/cidade/{id}")
     public ResponseEntity<Cidade> GetById(@PathVariable(value = "id") long id)
     {
-        Optional<Cidade> Cidade = _CidadeRepository.findById(id);
-        if(Cidade.isPresent())
-            return new ResponseEntity<Cidade>(Cidade.get(), HttpStatus.OK);
+        Optional<Cidade> cidade = _CidadeRepository.findById(id);
+        if(cidade.isPresent())
+            return new ResponseEntity<Cidade>(cidade.get(), HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -42,8 +42,8 @@ public class CidadeController {
 
     //POST 
     @PostMapping(value = "/cidade")
-    public Cidade postCidade(@RequestBody Cidade Cidade){
-        return _CidadeRepository.save(Cidade);
+    public Cidade postCidade(@RequestBody Cidade cidade){
+        return _CidadeRepository.save(cidade);
     }
 
 
@@ -54,10 +54,12 @@ public class CidadeController {
     {
         Optional<Cidade> oldCidade = _CidadeRepository.findById(id);
         if(oldCidade.isPresent()){
-            Cidade Cidade = oldCidade.get();
-            Cidade.setNome(newCidade.getNome());
-            _CidadeRepository.save(Cidade);
-            return new ResponseEntity<Cidade>(Cidade, HttpStatus.OK);
+            Cidade cidade = oldCidade.get();
+            cidade.setNome(newCidade.getNome());
+            cidade.setEstado(newCidade.getEstado());
+            cidade.setPopulacao(newCidade.getPopulacao());
+            _CidadeRepository.save(cidade);
+            return new ResponseEntity<Cidade>(cidade, HttpStatus.OK);
         }
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -68,9 +70,9 @@ public class CidadeController {
     @DeleteMapping(value = "/cidade/{id}")
     public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
     {
-        Optional<Cidade> Cidade = _CidadeRepository.findById(id);
-        if(Cidade.isPresent()){
-            _CidadeRepository.delete(Cidade.get());
+        Optional<Cidade> cidade = _CidadeRepository.findById(id);
+        if(cidade.isPresent()){
+            _CidadeRepository.delete(cidade.get());
             return new ResponseEntity<>(HttpStatus.OK);
         }
         else

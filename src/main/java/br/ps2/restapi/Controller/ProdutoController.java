@@ -54,6 +54,8 @@ public class ProdutoController {
         if(oldProduto.isPresent()){
             Produto produto = oldProduto.get();
             produto.setNome(newProduto.getNome());
+            produto.setMarca(newProduto.getMarca());
+            produto.setPreco(newProduto.getPreco());
             _produtoRepository.save(produto);
             return new ResponseEntity<Produto>(produto, HttpStatus.OK);
         }
