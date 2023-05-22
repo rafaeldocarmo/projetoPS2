@@ -9,7 +9,7 @@ public class Cidade {
     private long id;
     private String nome, estado;
     private int populacao;
-
+    //private int populacao;
 
     public Cidade() {
         nome = "";
